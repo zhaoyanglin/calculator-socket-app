@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 import './App.css'
 
 class App extends Component {
@@ -14,7 +14,7 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    const socket = socketIOClient(this.state.endpoint);
+    const socket = io(this.state.endpoint);
     socket.emit('new user')
     socket.on('calc', (array) => {
       this.setState({
@@ -25,7 +25,7 @@ class App extends Component {
 
   // sending sockets
   send = () => {
-    const socket = socketIOClient(this.state.endpoint);
+    const socket = io(this.state.endpoint);
     socket.emit('add calculation', this.state)
   }
   ///
