@@ -5,7 +5,7 @@ import './App.css'
 class App extends Component {
 
   state = {
-    endpoint: "ws://real-time-calculator.herokuapp.com:4001",
+    endpoint: "https://real-time-calculator.herokuapp.com:4001",
     firstValue: '',
     secondValue: '',
     result: '',
