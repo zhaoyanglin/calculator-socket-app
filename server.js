@@ -1,20 +1,20 @@
 const express = require('express')
-const http = require('http')
-const socketIO = require('socket.io')
+const app = require('http').createServer()
+const socketIO = require('socket.io')(app)
 
 
 const port = process.env.PORT || 4001;
 
-const app = express()
+//const app = express()
 
 app.use(express.static('build'));
 
 
-const server = http.createServer(app)
+//const server = http.createServer(app)
 
-server.listen(port, () => console.log(`Listening on port ${port}`))
+app.listen(port, () => console.log(`Listening on port ${port}`))
 
-const io = socketIO(server)
+const io = module.exports.io = socketIO;
 
 class CalculationModel {
     constructor(firstValue, secondValue, result, operation) {
