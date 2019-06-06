@@ -3,7 +3,7 @@ const http = require('http')
 const socketIO = require('socket.io')
 
 
-const port = 4001
+const port = process.env.PORT || 4001;
 
 const app = express()
 
@@ -12,6 +12,7 @@ app.use(express.static('build'));
 
 const server = http.createServer(app)
 
+server.listen(port, () => console.log(`Listening on port ${port}`))
 
 const io = socketIO(server)
 
@@ -57,5 +58,3 @@ console.log('this is the event=============', event);
         console.log('user disconnected')
     })
 })
-
-server.listen(port, () => console.log(`Listening on port ${port}`))
