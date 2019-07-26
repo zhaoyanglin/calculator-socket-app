@@ -9,7 +9,7 @@ const app = express()
 
 app.use(express.static('build'));
 
-
+// need http wrapper for socketIO constructor
 const server = http.createServer(app)
 
 server.listen(port, () => console.log(`Listening on port ${port}`))
@@ -31,7 +31,7 @@ class CalculationModel {
 
 let calculations = [];
 
-
+// establish socket connection when the user use site
 io.on('connection', socket => {
 
     socket.on('add calculation', (event) => {
@@ -46,9 +46,10 @@ console.log('this is the event=============', event);
             calculations.push(newCalc)
         }
 
-        io.sockets.emit('calc', calculations.reverse())
+        io.sockets.emit('calc', calculations.reverse()) //.reverse is so when a new calculation is inputed it will appear on the top instead of bottom
     })
 
+    //when new user opens the app 'new user' event will emit the array from calculation 
     socket.on('new user', () => {
         io.sockets.emit('calc', calculations.reverse())
     })
